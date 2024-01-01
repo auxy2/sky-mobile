@@ -85,12 +85,13 @@ const Stack = createNativeStackNavigator();
 
 // Authentication stack
 function AuthStack() {
+  const { theme } = useTheme();
   return (
     <Stack.Navigator
       screenOptions={{
         headerTitle: "",
         headerTransparent: true,
-        headerTintColor: "white",
+        headerTintColor: theme.white,
         headerLeftContainerStyle: { paddingLeft: 20, },
         headerStyle: { backgroundColor: "transparent" },
       }} initialRouteName="GetStarted"
@@ -134,9 +135,9 @@ function DrawerStack({ navigation }) {
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
-        headerTintColor: "#fff",
-        drawerActiveTintColor: "#fff",
-        drawerInactiveTintColor: "#fff",
+        headerTintColor: theme.white,
+        drawerActiveTintColor: theme.white,
+        drawerInactiveTintColor: theme.white,
         drawerActiveBackgroundColor: "none",
         drawerLabelStyle: {
           fontSize: 13,
@@ -144,12 +145,12 @@ function DrawerStack({ navigation }) {
           fontWeight: "500",
           paddingBottom: 18,
           borderBottomWidth: 1,
-          borderBottomColor: "#fff",
+          borderBottomColor: theme.white,
         },
         headerStyle: { backgroundColor: theme.backgroundColor, elevation: 0, shadowOpacity: 0 },
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Notification")}>
-            <Ionicons name="notifications-outline" size={24} color="white" paddingRight={16} />
+            <Ionicons name="notifications-outline" size={24} color={theme.white} paddingRight={16} />
           </TouchableOpacity>
         ),
       }}
@@ -215,16 +216,18 @@ function DrawerStack({ navigation }) {
 
 // Bottom Tab Navigator
 function TabNavigator() {
+  const { theme } = useTheme();
+  
   return (
     <Tab.Navigator
       options={{ style: { padding: 30 } }}
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#1350E8",
-        tabBarInactiveTintColor: "#8B9CC8",
+        tabBarActiveTintColor: theme.tabBarActiveBG,
+        tabBarInactiveTintColor: theme.tabBarInactiveBG,
         tabBarItemStyle: { paddingBottom: 10 },
         tabBarActiveBackgroundColor: "rgba(19, 80, 232, 0.3)",
-        tabBarStyle: { backgroundColor: "#102249", padding: 10, height: 70 },
+        tabBarStyle: { backgroundColor: theme.tabBarColor, padding: 10, height: 70 },
       }}
     >
       <Tab.Screen
@@ -269,17 +272,18 @@ function TabNavigator() {
 
 // Main navigation
 export default function MainNavigators() {
+  const { theme } = useTheme();
   return (
     <Stack.Navigator
       screenOptions={{
         headerTitle: "",
         headerTransparent: true,
-        headerTintColor: "white",
+        headerTintColor: theme.white,
         headerLeftContainerStyle: { paddingLeft: 20 },
         headerStyle: { backgroundColor: "transparent" },
       }}
-      // initialRouteName="AuthStack"
-    initialRouteName="MainContent"
+      initialRouteName="AuthStack"
+    // initialRouteName="MainContent"
     >
       <Stack.Screen name="AuthStack" component={AuthStack} options={{ headerShown: false }} />
       <Stack.Screen name="MainContent" component={TabNavigator} options={{ headerShown: false }} />

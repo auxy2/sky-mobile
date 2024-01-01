@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "frontend",
-    "slug": "frontend",
+    "slug": "crypto-application",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -30,17 +30,19 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "skyshow.ng"
+      "package": "skyshow.ng",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
-    ,
+    },
     "extra": {
       "eas": {
-        "projectId": "259c1187-31d1-435d-88b3-eea531aa0695"
+        "projectId": "39387cec-cb2a-4537-ac91-96bb58553a06"
       }
     },
-    "owner": "miraclemarcel"
+    "owner": "is_akanni"
   }
 }

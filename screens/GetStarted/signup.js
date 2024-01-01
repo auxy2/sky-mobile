@@ -34,13 +34,19 @@ const { inputPlaceholder, backgroundColor } = Colors;
 
 const Signup = () => {
   const navigation = useNavigation();
-  const { signup, error, loading,setError } = useAuthentication();
-
+  const { signup, error, loading, setError } = useAuthentication();
 
   const [messageType] = useState();
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
-  const [data, setData] = useState({ name: "", email: "", username: "", phoneNumber: "", password: "", passConfirm: "" });
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    username: "",
+    phoneNumber: "",
+    password: "",
+    passConfirm: "",
+  });
 
   // const handleMessage = (message, type = "FAILED") => {
   //   setMessage(message);
@@ -48,18 +54,24 @@ const Signup = () => {
   // };
 
   const handleSignup = async () => {
-    const { status, message } = isValidPassword(data.password, data.passConfirm);
+    const { status, message } = isValidPassword(
+      data.password,
+      data.passConfirm
+    );
 
-    console.log(status,message)
+    console.log(status, message);
 
-    // if (!isEmail(data.email)) return setError("Enter a valid email");
-    // // else if (isValidPhone(data.phoneNumber)) return setError("Enter a valid phone number");
-    // else if (!status) return setError(message ?? "Password must be at least 8");
+    if (!isEmail(data.email)) return setError("Enter a valid email");
+    else if (isValidPhone(data.phoneNumber))
+      return setError("Enter a valid phone number");
+    else if (!status) return setError(message ?? "Password must be at least 8");
 
-    await signup(data, () => { navigation.navigate("SignUpAuth", data); });
+    await signup(data, () => {
+      navigation.navigate("SignUpAuth", data);
+    });
   };
 
-  return ( 
+  return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <StyledContainer>
@@ -70,7 +82,7 @@ const Signup = () => {
               <StyledTextInput
                 placeholder="Full name"
                 placeholderTextColor={inputPlaceholder}
-                onChangeText={(name) => setData(prev => ({ ...prev, name }))}
+                onChangeText={(name) => setData((prev) => ({ ...prev, name }))}
                 // onBlur={handleBlur("name")}
                 value={data.name}
                 keyboardType="default"
@@ -78,7 +90,9 @@ const Signup = () => {
               <StyledTextInput
                 placeholder="Username"
                 placeholderTextColor={inputPlaceholder}
-                onChangeText={(username) => setData(prev => ({ ...prev, username }))}
+                onChangeText={(username) =>
+                  setData((prev) => ({ ...prev, username }))
+                }
                 // onBlur={handleBlur("name")}
                 value={data.username}
                 keyboardType="default"
@@ -86,7 +100,9 @@ const Signup = () => {
               <StyledTextInput
                 placeholder="Email"
                 placeholderTextColor={inputPlaceholder}
-                onChangeText={(email) => setData(prev => ({ ...prev, email }))}
+                onChangeText={(email) =>
+                  setData((prev) => ({ ...prev, email }))
+                }
                 // onBlur={handleBlur("email")}
                 value={data.email}
                 keyboardType="email-address"
@@ -94,7 +110,9 @@ const Signup = () => {
               <StyledTextInput
                 placeholder="Phone number"
                 placeholderTextColor={inputPlaceholder}
-                onChangeText={(phoneNumber) => setData(prev => ({ ...prev, phoneNumber }))}
+                onChangeText={(phoneNumber) =>
+                  setData((prev) => ({ ...prev, phoneNumber }))
+                }
                 // onBlur={handleBlur("phoneNumber")}
                 value={data.phoneNumber}
                 keyboardType="numeric"
@@ -102,7 +120,9 @@ const Signup = () => {
               <MyTextInput
                 placeholder="Password"
                 placeholderTextColor={inputPlaceholder}
-                onChangeText={(password) => setData(prev => ({ ...prev, password }))}
+                onChangeText={(password) =>
+                  setData((prev) => ({ ...prev, password }))
+                }
                 // onBlur={handleBlur("password")}
                 value={data.password}
                 secureTextEntry={hidePassword}
@@ -111,7 +131,9 @@ const Signup = () => {
               <MyTextInput
                 placeholder="Confirm password"
                 placeholderTextColor={inputPlaceholder}
-                onChangeText={(passConfirm) => setData(prev => ({ ...prev, passConfirm }))}
+                onChangeText={(passConfirm) =>
+                  setData((prev) => ({ ...prev, passConfirm }))
+                }
                 // onBlur={handleBlur("passConfirm")}
                 value={data.passConfirm}
                 secureTextEntry={hideConfirmPassword}
